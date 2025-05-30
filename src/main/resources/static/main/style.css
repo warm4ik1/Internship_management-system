@@ -1,0 +1,974 @@
+@import url("../utils/reset.css");
+
+/* Базовые стили */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f0f2f5;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.site-main {
+    flex: 1;
+    padding-top: 70px; /* основной контент растягивается */
+}
+
+/* Кнопка профиля */
+.profile-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: #1e90ff;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Контейнер поиска */
+.search-container {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ряд фильтров и группы внутри */
+.filter-row {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.filter-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Инпуты, селекты и кнопки в ряду одинакового размера */
+.filter-row input,
+.filter-row select,
+.filter-row button {
+    height: 34px;
+    font-size: 0.9rem;
+}
+
+/* Поле поиска */
+#searchInput {
+    flex: 2;
+    min-width: 300px;
+    padding: 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 17px;
+    font-size: 1rem;
+}
+
+/* Селект режима поиска */
+#searchMode {
+    margin-left: 10px;
+    padding: 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background: #1e90ff;
+    color: #fff;
+    cursor: pointer;
+}
+
+#searchMode option {
+    background: #fff;
+    color: #333;
+}
+
+/* Кнопки «Найти» и «Сбросить» */
+.btn-search,
+.btn-reset {
+    height: 34px;
+    padding: 0 16px;
+    border: none;
+    border-radius: 17px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    transition: background 0.2s, opacity 0.2s;
+}
+
+.btn-search {
+    background: #1e90ff;
+    color: #fff;
+}
+
+.btn-search:hover {
+    background: #187bcd;
+}
+
+.btn-reset {
+    background: #1e90ff;
+    color: #fff;
+    opacity: 0.8;
+}
+
+.btn-reset:hover {
+    opacity: 1;
+}
+
+/* Кнопка «Фильтры» */
+.dropdown-btn {
+    height: 34px;
+    padding: 8px 16px;
+    background: #1e90ff;
+    color: #fff;
+    border: none;
+    border-radius: 17px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 0.9rem;
+}
+
+/* Дропдаун фильтров */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 300px;
+    padding: 25px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+/* Секции внутри дропдауна */
+.filter-section {
+    margin-bottom: 15px;
+}
+
+.filter-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Селекты и инпуты внутри дропдауна */
+.dropdown-content input,
+.dropdown-content select {
+    width: 100%;
+    height: 32px;
+    padding: 0 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    font-size: 0.9rem;
+}
+
+.dropdown-content select[name="paymentType"] {
+    background: #fff;
+    color: #333;
+}
+
+.dropdown-content select {
+    background: #1e90ff;
+    color: #fff;
+}
+
+/* Список категорий */
+#categoryListBox {
+    background: #fff;
+    border: 1px solid #003d80;
+    border-radius: 8px;
+    min-height: 150px;
+    color: #333;
+}
+
+/* Теги категорий */
+/* Контейнер выбранных категорий: всегда 2 колонки */
+.selected-categories {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    margin-top: 10px;
+}
+
+/* Каждая метка может быть «резиновой» внутри колонки */
+.category-tag {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #1e90ff;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 15px;
+    /* больше не нужен flex-калькулятор ширины */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.remove-category {
+    margin-left: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Карточки стажировок */
+.grid-container {
+    display: grid;
+    /* Всегда ровно 3 колонки по 350px */
+    grid-template-columns: repeat(3, 350px);
+    /* Отступы между карточками: 40px по горизонтали и вертикали */
+    column-gap: 60px;
+    row-gap: 30px;
+    /* Центрируем всю сетку в контейнере */
+    justify-content: center;
+    /* Минимальная ширина под 3 колонки + 2 промежутка по 40px */
+    width: fit-content;
+    /* Отступы вокруг сетки сверху/снизу */
+    padding: 10px 0;
+    /* Центрирование блока на странице */
+    margin: 0 auto;
+}
+
+
+.internship-card {
+    position: relative;
+
+    width: 350px;
+    background: #fff;
+    border-radius: 25px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    /* --- добавляем flex-контейнер --- */
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    font-size: 0.95rem;
+}
+
+.internship-card h3 {
+    text-align: center;
+    margin-top: 0;
+}
+
+.internship-card img.internship-logo {
+    display: block;
+    margin: 0 auto 10px;
+    width: 140px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.internship-card .details-btn {
+    display: block;
+    width: 60%;
+    height: 40px;
+    margin: 15px auto 0;
+    padding: 8px 16px;
+    font-size: 1rem;
+    background: #1e90ff;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.internship-card .details-btn:hover {
+    background: #187bcd;
+}
+
+.internship-card .description {
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Пагинация */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.pagination button {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.pagination button.active {
+    background: #1e90ff;
+    color: #fff;
+    border-color: #1e90ff;
+}
+
+.pagination button:hover:not(.active) {
+    background: #f0f0f0;
+}
+
+.pagination .dots {
+    padding: 6px 12px;
+    color: #888;
+}
+
+/* Модальное окно */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+/* Form actions */
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+.card-actions {
+    /* «отталкиваем» кнопки вниз */
+    margin-top: auto;
+
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.favorite-btn {
+    margin-top: 15px;
+    padding: 2px 16px;
+    height: 40px;
+    font-size: 1rem;
+    background: #28a745; /* зелёный */
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.favorite-btn:hover {
+    background: #218838; /* чуть темнее при наведении */
+}
+
+/* внутри вашего style.css */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center; /* для flex-центровки */
+    justify-content: center;
+    animation: fadeInBg 0.3s ease forwards;
+}
+
+.modal.show {
+    display: flex;
+}
+
+@keyframes fadeInBg {
+    from {
+        background: rgba(0, 0, 0, 0);
+    }
+    to {
+        background: rgba(0, 0, 0, 0.5);
+    }
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px;
+    transform: translateY(-30px);
+    opacity: 0;
+    animation: slideIn 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Кнопка закрытия */
+.modal .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    font-size: 1.2rem;
+    background: #dc3545; /* красный фон */
+    color: #fff;
+    border-radius: 4px; /* квадратный с небольшим скруглением */
+    cursor: pointer;
+}
+
+.modal-content img {
+    display: block;
+    margin: 0 auto 15px;
+    width: 250px; /* ширина больше, чем высота */
+    height: 180px; /* меняйте под нужное соотношение сторон */
+    object-fit: contain;
+    border-radius: 4px; /* можно чуть скруглить углы, либо поставить 0 */
+}
+
+/* Отключаем прокрутку боди, когда модалка открыта */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Скролл внутри модалки: синий ползунок */
+.modal-content {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background-color: #1e90ff; /* синий */
+    border-radius: 4px;
+}
+
+/* --- Тёмная обводка для контейнера поиска/фильтров --- */
+.search-container {
+    border: 2px solid #333; /* тёмно-серая рамка */
+    /* остальные ваши свойства */
+}
+
+/* --- Синяя обводка для карточек стажировок --- */
+.internship-card {
+    border: 2px solid #333; /* насыщенный синий */
+    /* уже есть: background, border-radius, padding, box-shadow… */
+}
+
+/* Для плавного эффекта при наведении можно добавить */
+.internship-card {
+    transition: border-color 0.2s;
+}
+
+.internship-card:hover {
+    border-color: #333; /* чуть более тёмный синий при hover */
+}
+
+/* Синий скроллбар для всей страницы (Chrome, Edge, Safari) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 8px; /* толщина скроллбара */
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+    background: #f0f2f5; /* фон дорожки скролла */
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+    background-color: #1e90ff; /* цвет «ползунка» */
+    border-radius: 4px; /* скруглённые углы */
+    border: 2px solid #f0f2f5; /* небольшой отступ вокруг */
+}
+
+/* Синий скроллбар для Firefox */
+body {
+    scrollbar-width: thin; /* тонкий скроллбар */
+    scrollbar-color: #1e90ff #f0f2f5; /* цвет-ползунок | цвет-трек */
+}
+
+.category-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background-color: #e0e0e0;
+    border-radius: 50px;
+    font-size: 0.85em;
+    margin: 2px 4px 6px 0;
+
+    /* --- ключевые строки для обрезки --- */
+    white-space: nowrap; /* всё в одну строку */
+    overflow: hidden; /* обрезаем выходящее */
+    text-overflow: ellipsis; /* добавляем «…» */
+    max-width: 100%; /* не шире контейнера */
+    box-sizing: border-box;
+}
+
+
+/* 2) Обрезаем длинные названия категорий троеточием */
+.categories-container {
+    /* чтобы бейджи выстраивались в ряд и переносились */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.no-results-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #888;
+    font-size: 1.2em;
+    margin-top: 30px;
+}
+
+/* общий класс для всех подсказок-ошибок */
+.error-message {
+    display: block;
+    color: #dc3545; /* насыщенный красный */
+    font-size: 0.85em; /* чуть меньше основного текста */
+    margin-top: 4px; /* небольшой отступ сверху */
+    min-height: 1em; /* резерв места, чтобы не «скакало» при появлении */
+}
+
+/* если хотите отдельно для даты */
+#dateError {
+    color: #dc3545;
+}
+
+/* и для поиска */
+#searchError {
+    color: #dc3545;
+}
+
+/* контейнер поиска + кнопка в одну строку */
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 20px auto 80px; /* можно подстроить под ваш текущий отступ */
+    padding: 0 20px; /* отступы по бокам */
+    gap: 20px;
+}
+
+/* в) стилизуем кнопку так, чтобы она «расправилась» по всей высоте строки */
+.btn-add {
+
+    position: relative;
+    left: -60px;
+    top: 0;
+    flex-shrink: 0; /* не сжимается */
+    display: inline-flex; /* чтобы можно было центрировать крестик+текст */
+    align-items: center;
+    justify-content: center;
+    padding: 17px 25px; /* эти паддинги зададут ей высоту = высоте .search-container */
+    font-size: 1rem;
+    border: 2px solid black;
+    border-radius: 20px;
+    background: #28a745;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    transition: background 0.2s;
+
+}
+
+.btn-add:hover {
+    background: #218838;
+}
+
+/* Примерно */
+.search-container.user-only {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+/* Общие стили для кнопок */
+.edit-btn,
+.delete-btn {
+    position: absolute; /* Абсолютное позиционирование */
+    top: 10px; /* Отступ сверху */
+    width: auto; /* Ширина зависит от контента */
+    padding: 8px 13px; /* Внутренние отступы для кнопки */
+    font-size: 16px; /* Размер текста */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px; /* Скругленные углы */
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease; /* Плавный переход для эффекта наведения */
+}
+
+/* Кнопка редактирования (карандаш) */
+.edit-btn {
+    background-color: #ff7c00; /* Жёлтый фон */
+    color: black;
+    right: 10px;
+}
+
+/* Кнопка удаления (корзина) */
+.delete-btn {
+    background-color: #e40707; /* Красный фон */
+    color: white; /* Белый цвет текста */
+    left: 10px; /* Справа */
+}
+
+/* Эффект наведения на кнопки */
+.edit-btn:hover,
+.delete-btn:hover {
+    opacity: 0.8; /* Слегка уменьшаем прозрачность при наведении */
+}
+
+/* Полупрозрачный фон модали */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Увеличим размер модалки, скругление и толщину обводки */
+.modal-window {
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    word-break: break-word;
+    background: #fff;
+    border: 3px solid #4a90e2; /* чуть толще */
+    border-radius: 12px; /* увеличенный радиус */
+    padding: 24px;
+    max-width: 900px; /* чуть больше */
+    width: 90%;
+}
+
+
+/* Заголовок модали */
+.modal-window h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 12px; /* чуть ниже, чтобы не прилегала слишком плотно */
+    right: 16px; /* отступ справа */
+    background: transparent;
+    border: none;
+    font-size: 1.6rem; /* увеличенный размер крестика */
+    line-height: 1;
+    cursor: pointer;
+    color: #666; /* мягкий оттенок */
+}
+
+/* Удостоверимся, что кнопки в один ряд и одинаковой высоты */
+.modal-actions {
+    text-align: right;
+    margin-top: 20px;
+}
+
+/* Кнопки действий */
+.modal-actions button {
+    margin-left: 10px;
+    padding: 10px 18px; /* увеличили вертикальный паддинг до 10px */
+    min-height: 40px; /* гарантируем одну высоту */
+    border-radius: 6px;
+    border: 2px solid;
+    color: #fff;
+    font-weight: bold;
+}
+
+.modal-actions button.cancel {
+    background: #fff;
+    color: #ca0000;
+}
+
+.modal-window form input,
+.modal-window form textarea,
+.modal-window form select {
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.modal-window form label {
+    font-weight: bold;
+    display: block;
+    margin-top: 12px;
+}
+
+/* Кнопка «Да» */
+.yes-btn {
+    background-color: #e74c3c; /* ярко-красная */
+    border-color: #c0392b;
+}
+
+/* Кнопка «Нет» */
+.no-btn {
+    background-color: #27ae60; /* зелёная */
+    border-color: #1e8449;
+}
+
+/* Сохранить/OK (для alert) — оставим синий */
+.ok-btn {
+    background: #009c07;
+    color: #ffffff;
+}
+
+/* Тело модалки с вертикальным скроллом */
+.modal-body {
+    overflow-y: auto; /* только вертикальный */
+    overflow-x: hidden; /* горизонтальный запрещён */
+    padding-right: 8px; /* место под полосу прокрутки */
+}
+
+/* Фиксированный футер с кнопками */
+.modal-actions {
+    flex-shrink: 0;
+    background: #fff;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+/* Стили для строк контактных данных */
+.contact-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.contact-row select,
+.contact-row input {
+    flex: 1;
+}
+
+.contact-row .remove-contact {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* Отключаем ручное изменение размера */
+.modal-window form textarea,
+.modal-window form input[type="text"],
+.modal-window form select {
+    resize: none;
+}
+
+.modal-content,
+.modal-content .description {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal; /* Это важно! */
+}
+
+/* ———————————— */
+/* Уменьшаем ширину и отступы у полей формы внутри модалки */
+/* ———————————— */
+
+/* Добавим внутренние отступы у контейнера с формой */
+.modal-body {
+    padding: 20px; /* общий отступ вокруг формы */
+    box-sizing: border-box;
+}
+
+/* Ограничим ширину самой формы и центрируем её */
+.modal-body form {
+    max-width: 600px; /* можете подкорректировать число */
+    margin: 0 auto; /* центр по горизонтали */
+}
+
+/* Сделаем так, чтобы все инпуты/textarea/select заполняли 100% этой ограниченной области */
+.modal-body form input,
+.modal-body form textarea,
+.modal-body form select {
+    width: 100%;
+    box-sizing: border-box; /* чтобы padding не «ломал» ширину */
+    margin-bottom: 16px; /* отступы между полями */
+}
+
+/* При этом оставим лейблы и кнопки без ограничений */
+.modal-body form label,
+.modal-actions {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 1) Оранжевая кнопка «＋» для контактных данных */
+#addContactBtn {
+    background-color: rgba(136, 207, 5, 0.59); /* яркий оранжевый */
+    color: #fff; /* белый крестик */
+    border: none; /* без рамки */
+    cursor: pointer;
+}
+
+/* Можно чуть подкрутить отступы, если нужно */
+#addContactBtn {
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+/* 2) Увеличенный отступ между выбранными категориями и контактами */
+.modal-body .selected-categories {
+    margin-bottom: 24px; /* вместо текущих 10px сделаем 24px */
+}
+
+/* 1) Фон кнопок «Отмена» и «Сохранить» при hover */
+.modal-actions button.cancel:hover {
+    background-color: #ffe5e5; /* светло-красный подсвет */
+    color: #ca0000; /* можно оставить тот же цвет текста */
+}
+
+.modal-actions button.ok-btn:hover {
+    background-color: #004501; /* чуть более тёмный зелёный */
+    filter: brightness(1.1); /* лёгкий эффект яркости */
+}
+
+.logout-btn {
+    position: fixed;
+    top: 4px;
+    right: 20px;
+
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+
+    background-color: #1e90ff;
+    background-image: url('../img/logout.webp');
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.logout-btn:hover {
+    background-color: #187bcd;
+}
+
+/* --------------------- */
+/* Header & Footer Styles */
+/* --------------------- */
+.site-header,
+.site-footer {
+    background: linear-gradient(90deg, #0b0b1c 0%, #00032e 100%);
+    color: #ffffff;
+}
+
+/* Header */
+.site-header {
+    position: static;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.site-title {
+    font-size: 1.5rem;
+    margin: 0;
+    display: inline-block;
+    cursor: pointer;
+    padding: 4px; /* такой же отступ, как у .nav-link */
+    border-radius: 4px;
+    transition: background 0.2s; /* плавность эффекта */
+}
+
+.site-title:hover {
+    background: rgba(255, 255, 255, 0.2); /* такой же фон, как у .nav-link:hover */
+}
+
+.site-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Footer */
+.site-footer {
+    margin-top: 40px;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.internship-card .description {
+    font-style: italic;
+}
+
+.modal-content .description h1, h2, h3, h4 {
+    font-style: italic;
+}
+
+
+
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <include file="27-03-2025-update-pk-in-user-roles-table.xml" relativeToChangelogFile="true"/>
+    <include file="27-03-2025-01-rename-enum-types-up-case.xml" relativeToChangelogFile="true"/>
+    <include file="28-03-2025-02-update-pk-in-user-favorites-table.xml" relativeToChangelogFile="true"/>
+    <include file="29-03-2025-03-create-address-field-in-internship-table.xml" relativeToChangelogFile="true"/>
+    <include file="29-03-2025-04-reformat-type-address-field.xml" relativeToChangelogFile="true"/>
+    <include file="16-04-2025-05-change-cascade-in-internship_categories-table.xml" relativeToChangelogFile="true"/>
+    <include file="17-04-2025-06-change-PK-in-internship_categories-table.xml" relativeToChangelogFile="true"/>
+    <include file="17-04-2025-07-drop-unique-in-internship_categories-table.xml" relativeToChangelogFile="true"/>
+</databaseChangeLog>

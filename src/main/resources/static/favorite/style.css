@@ -1,0 +1,529 @@
+@import url("../utils/reset.css");
+
+.site-header,
+.site-footer {
+    background: linear-gradient(90deg, #0b0b1c 0%, #00032e 100%);
+    color: #ffffff;
+}
+
+/* Header */
+.site-header {
+    position: static;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #0b0b1c 0%, #00032e 100%);
+    color: #fff;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Чтобы контент не уходил за header */
+.site-main {
+    padding-top: 80px; /* высота header (+ запас) */
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.site-title {
+    font-size: 1.5rem;
+    margin: 0;
+    display: inline-block;
+    cursor: pointer;
+    padding: 4px; /* такой же отступ, как у .nav-link */
+    border-radius: 4px;
+    transition: background 0.2s; /* плавность эффекта */
+}
+
+.site-title:hover {
+    background: rgba(255, 255, 255, 0.2); /* такой же фон, как у .nav-link:hover */
+}
+
+.site-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Footer */
+.site-footer {
+    position: static;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #0b0b1c 0%, #00032e 100%);
+    color: #fff;
+
+    text-align: center;
+    font-size: 0.9rem;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 40px;
+    padding: 15px 20px;
+}
+
+/* Чтобы контент не уходил за footer */
+body {
+
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    background: #f0f2f5;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+}
+
+.logout-btn {
+    position: fixed;
+    top: 4px;
+    right: 20px;
+
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+
+    background-color: #1e90ff;
+    background-image: url('../img/logout.webp');
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* ==== ОСНОВНОЙ КОНТЕНТ ==== */
+.site-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 20px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.site-main h2 {
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+}
+
+/* ==== КАРТОЧКИ ИЗБРАННЫХ ==== */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 350px); /* фиксированная сетка */
+    gap: 30px 60px; /* как на главной */
+    justify-content: center;
+    padding: 10px 0;
+    margin: 0 auto 50px;
+    width: fit-content;
+}
+
+.internship-card {
+    position: relative;
+    width: 350px;
+    background: #fff;
+    border-radius: 25px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 2px solid #333;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s;
+}
+
+.internship-card:hover {
+    border-color: #333;
+}
+
+.internship-card h3 {
+    text-align: center;
+    margin-top: 0;
+}
+
+.internship-card img.internship-logo {
+    display: block;
+    margin: 0 auto 10px;
+    width: 140px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.internship-card .description {
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.internship-card p {
+    text-align: left;
+    line-height: 1.2;
+    font-size: 0.95rem;
+}
+
+.remove-favorite {
+    align-self: center;
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.remove-favorite:hover {
+    background: #c82333;
+}
+
+/* ==== ПАГИНАЦИЯ ==== */
+.pagination {
+    margin-top: auto;
+    margin-bottom: 0;
+/ display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pagination button {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+
+.pagination button.active {
+    background: #1e90ff;
+    color: #fff;
+    border-color: #1e90ff;
+}
+
+.pagination button:hover:not(.active) {
+    background: #f0f0f0;
+}
+
+/* Стили для страницы избранного */
+.site-main h2 {
+    position: relative;
+    text-align: center;
+    left: 22px;
+    margin: -50px 0;
+    color: #333;
+    font-size: 2rem;
+}
+
+.card-actions {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.details-btn {
+    background: #1e90ff;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.details-btn:hover {
+    background: #187bcd;
+}
+
+.remove-favorite {
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.remove-favorite:hover {
+    background: #c82333;
+}
+
+.categories-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.category-badge {
+    background-color: #e0e0e0;
+    border-radius: 50px;
+    padding: 4px 10px;
+    font-size: 0.85em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.details-btn,
+.remove-favorite {
+    height: 40px;
+    font-size: 1rem;
+    padding: 8px 50px;
+    border-radius: 25px;
+}
+
+.top-bar {
+    width: 100%;
+}
+
+.pagination {
+    width: 100%;
+    justify-content: center;
+}
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-window {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 600px;
+    width: 90%;
+    border: 2px solid #4a90e2;
+}
+
+.modal-window h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.modal-actions {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.modal-actions button {
+    margin-left: 10px;
+    padding: 10px 18px;
+    min-height: 40px;
+    border-radius: 6px;
+    border: 2px solid;
+    color: #fff;
+    font-weight: bold;
+}
+
+.modal-actions button.yes-btn {
+    background-color: #e74c3c;
+    border-color: #c0392b;
+}
+
+.modal-actions button.no-btn {
+    background-color: #27ae60;
+    border-color: #1e8449;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 20px;
+    position: relative;
+}
+
+/* Кнопка закрытия */
+.modal .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    font-size: 1.2rem;
+    background: #dc3545; /* красный фон */
+    color: #fff;
+    border-radius: 4px; /* квадратный с небольшим скруглением */
+    cursor: pointer;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #666;
+}
+
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background-color: #1e90ff;
+    border-radius: 4px;
+}
+
+.modal-backdrop {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-window {
+    position: relative;
+    border: 3px solid #4a90e2;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 900px;
+    background: #fff;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+.modal.visible {
+    display: flex; /* Отображаем при добавлении класса visible */
+    animation: fadeInBg 0.3s ease forwards;
+}
+
+.modal-content img {
+    display: block;
+    margin: 0 auto 15px;
+    width: 250px; /* ширина больше, чем высота */
+    height: 180px; /* меняйте под нужное соотношение сторон */
+    object-fit: contain;
+    border-radius: 4px; /* можно чуть скруглить углы, либо поставить 0 */
+}
+
+/* Скролл внутри модалки: синий ползунок */
+.modal-content {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background-color: #1e90ff; /* синий */
+    border-radius: 4px;
+}
+
+.modal-content,
+.modal-content .description {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal; /* Это важно! */
+}
+
+/* Центрирование заголовка */
+.site-main .top-bar {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+/* Стиль для заголовка */
+.favorites-title {
+    position: relative;
+    left: 50px;
+}
+
+/* Адаптация навигации для одного элемента */
+.site-nav.single-link {
+    justify-content: flex-end;
+}
+
+.site-nav.single-link .home-link {
+    margin-right: auto;
+}
+
+.internship-card .description {
+    font-style: italic;
+}
+
+.modal-content .description h1, h2, h3, h4 {
+    font-style: italic;
+}
+
+/* Сообщение при отсутствии избранных */
+.no-favorites-message {
+    grid-column: 1 / -1; /* растянуть на всю ширину сетки */
+    text-align: center;
+    color: #666;
+    font-size: 1.4rem;
+    padding: 80px 20px;
+    position: relative;
+    left: 35px;
+}
+
+html, body {
+    overflow-x: hidden; /* отключаем горизонтальную прокрутку */
+}
+
+html.modal-open,
+body.modal-open {
+    overflow: hidden; /* запрет прокрутки */
+    height: 100%; /* чтобы overflow:hidden применялся */
+}
+

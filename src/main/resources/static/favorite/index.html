@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Избранные стажировки</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="./index.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="header-container">
+        <h1 class="site-title" id="homeLink">Internship Management System</h1>
+        <nav class="site-nav">
+            <a href="/main/index.html" class="nav-link">Главная</a>
+            <a href="/category/index.html" class="nav-link categories-link" style="display: none;">Категории</a>
+        </nav>
+        <button class="logout-btn" title="Logout"></button>
+    </div>
+</header>
+
+<main class="site-main">
+    <div class="top-bar">
+        <h2>Избранные стажировки</h2>
+    </div>
+    <div class="grid-container" id="favoritesGrid"></div>
+    <div class="pagination" id="pagination"></div>
+</main>
+
+<div id="detailsModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-body" id="modalBody">
+        </div>
+    </div>
+</div>
+
+<footer class="site-footer">
+    © 2025 Internship Management System
+</footer>
+</body>
+
+</html>

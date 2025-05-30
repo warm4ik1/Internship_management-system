@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="17-04-2025-change-PK-in-internship-categories-table" author="warm4ik">
+        <preConditions onFail="HALT">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM (
+                         SELECT internship_id, category_id
+                         FROM todolist.internship_categories
+                         GROUP BY internship_id, category_id
+                         HAVING COUNT(*) > 1
+                     ) AS duplicates
+            </sqlCheck>
+        </preConditions>
+
+
+        <dropPrimaryKey tableName="internship_categories" schemaName="todolist"/>
+        <dropColumn tableName="internship_categories" schemaName="todolist" columnName="id"/>
+
+        <addPrimaryKey tableName="internship_categories"
+                       columnNames="internship_id,category_id"
+                       constraintName="internship_categories_pkey"
+                       schemaName="todolist"/>
+
+        <rollback>
+            <addColumn tableName="internship_categories" schemaName="todolist">
+                <column name="id" type="bigint" autoIncrement="true">
+                    <constraints nullable="false"/>
+                </column>
+            </addColumn>
+            <addPrimaryKey tableName="internship_categories"
+                           schemaName="todolist"
+                           columnNames="id"
+                           constraintName="internship_categories_pkey"/>
+        </rollback>
+
+    </changeSet>
+</databaseChangeLog>

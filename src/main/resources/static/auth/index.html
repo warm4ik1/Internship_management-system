@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./index.js" defer></script>
+</head>
+<body>
+<div class="main">
+    <input type="checkbox" id="chk" aria-hidden="true">
+
+    <div class="signup">
+        <form id="signupForm">
+            <div class="form-content">
+                <label for="chk" aria-hidden="true">Регистрация</label>
+
+                <input type="text" name="txt" placeholder="Никнейм" required>
+                <div class="error" id="usernameError"></div>
+
+                <input type="email" name="email" placeholder="Email" required>
+                <div class="error" id="emailError"></div>
+
+                <input type="password" name="pswd" placeholder="Пароль" required>
+                <div class="error" id="passwordError"></div>
+
+                <button>Зарегистрироваться</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="login">
+        <form id="loginForm">
+            <div class="form-content">
+                <label for="chk" aria-hidden="true">Войти</label>
+
+                <div class="form-fields">
+                    <input type="email" name="email" placeholder="Email" required>
+                    <div class="error" id="loginEmailError"></div>
+
+                    <input type="password" name="pswd" placeholder="Пароль" required>
+                    <div class="error" id="loginPasswordError"></div>
+
+                    <button>Войти</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>
+

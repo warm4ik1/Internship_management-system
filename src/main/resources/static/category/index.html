@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Управление категориями</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<header class="site-header">
+    <div class="header-container">
+        <h1 class="site-title" id="homeLink">Internship Management System</h1>
+        <div class="spacer"></div>
+        <nav class="site-nav">
+            <a href="/main/index.html" class="nav-link">Главная</a>
+            <a href="/favorite/index.html" class="nav-link">Избранное</a>
+        </nav>
+        <button class="logout-btn" id="logout-btn" title="Logout"></button>
+    </div>
+</header>
+
+<main class="category-admin-main">
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Поиск категорий..."/>
+        <button id="searchBtn">🔍</button>
+        <button id="resetBtn">↺</button>
+        <button id="addCategoryBtn">➕</button>
+    </div>
+
+    <div class="category-grid" id="categoryGrid"></div>
+
+    <div class="pagination-container" id="pagination"></div>
+</main>
+
+<footer class="site-footer">
+    © 2025 Internship Management System
+</footer>
+
+<script type="module" src="/category/index.js"></script>
+</body>
+</html>

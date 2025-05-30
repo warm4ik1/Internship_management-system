@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="27-03-2025-rename-enum-type-contact-type-upper-case" author="warm4ik">
+
+        <sql>ALTER TYPE contact_type RENAME VALUE 'telegram' TO 'TELEGRAM';</sql>
+        <sql>ALTER TYPE contact_type RENAME VALUE 'email' TO 'EMAIL';</sql>
+        <sql>ALTER TYPE contact_type RENAME VALUE 'website' TO 'WEBSITE';</sql>
+
+    </changeSet>
+
+    <changeSet id="27-03-2025-rename-enum-type-internship-type" author="warm4ik">
+
+        <sql>ALTER TYPE internship_type RENAME TO payment_type;</sql>
+
+    </changeSet>
+
+    <changeSet id="27-03-2025-rename-enum-type-internship-type-upper-case" author="warm4ik">
+
+        <sql>ALTER TYPE payment_type RENAME VALUE 'paid' TO 'PAID';</sql>
+        <sql>ALTER TYPE payment_type RENAME VALUE 'unpaid' TO 'UNPAID';</sql>
+
+    </changeSet>
+</databaseChangeLog>

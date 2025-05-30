@@ -1,0 +1,48 @@
+# HELP file
+HELP.md
+
+# Gradle / Java
+.gradle/
+build/
+/out/
+/*.iml
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+# GitHub Actions workflows (если не хотите хранить их в репозитории)
+/.github/workflows/*.yml
+
+# OS-specific
+.DS_Store
+Thumbs.db

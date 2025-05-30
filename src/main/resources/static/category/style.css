@@ -1,0 +1,416 @@
+@import url("../utils/reset.css");
+
+/* Обновленные стили шапки страницы категорий для соответствия стилю избранного и главной */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #f0f2f5;
+    overflow-x: hidden;
+}
+
+.site-header,
+.site-footer {
+    background: linear-gradient(90deg, #0b0b1c 0%, #00032e 100%);
+    color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.site-header {
+    position: static;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    gap: 40px;
+}
+
+.site-title {
+    font-size: 1.5rem;
+    margin: 0;
+    display: inline-block;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.site-title:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.site-nav {
+    display: flex;
+    gap: 20px;
+    flex-grow: 1;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.logout-btn {
+    position: fixed;
+    top: 4px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: #1e90ff;
+    background-image: url('../img/logout.webp');
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.site-footer {
+    width: 100%;
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 15px 20px;
+    margin-top: auto;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.spacer {
+    flex-grow: 30;
+}
+
+.category-admin-main {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.search-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 80px;
+}
+
+#searchInput {
+    width: 300px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+#searchBtn, #addCategoryBtn {
+    padding: 10px 15px;
+    border: none;
+    background-color: #1e90ff;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+#searchBtn:hover, #addCategoryBtn:hover {
+    background-color: #0072d6;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 столбца */
+    grid-template-rows: repeat(4, 1fr); /* 4 строки */
+    gap: 60px 80px;
+    justify-content: center; /* вертикальные/горизонтальные отступы */
+    width: 100%;
+}
+
+.category-title {
+    flex: 1;
+    text-align: left;
+}
+
+.category-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.action-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.action-btn.edit {
+    background: orange;
+    color: white;
+}
+
+.action-btn.delete {
+    background: red;
+    color: white;
+}
+
+.category-item {
+    background: #fff;
+    border-radius: 12px;
+    border: 2px solid #333;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-align: center;
+    height: 120px;
+    width: 300px;
+    max-width: 100%;
+}
+
+.category-item.placeholder {
+    background: transparent;
+    box-shadow: none;
+    pointer-events: none;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    gap: 10px;
+}
+
+.pagination-container button {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid #1e90ff;
+    background-color: white;
+    color: #1e90ff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.pagination-container button:hover {
+    background-color: #0072d6;
+}
+
+#pageNumber {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.pagination-container button.active {
+    background-color: #007fff; /* синий фон */
+    color: white; /* белый текст */
+}
+
+.pagination-container button:disabled {
+    cursor: default;
+    opacity: 0.6;
+}
+
+#addCategoryBtn {
+    background-color: #28a745; /* зелёный */
+}
+
+#addCategoryBtn:hover {
+    background-color: #218838;
+}
+
+/* ---------------------------------------------------
+   Кнопки в строке поиска
+   --------------------------------------------------- */
+#searchBtn, #resetBtn, #addCategoryBtn {
+    padding: 10px 15px;
+    border: none;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#searchBtn {
+    background: #1e90ff;
+}
+
+#searchBtn:hover {
+    background: #0072d6;
+}
+
+#resetBtn {
+    background: #6c757d;
+}
+
+#resetBtn:hover {
+    background: #5a6268;
+}
+
+#addCategoryBtn {
+    background: #28a745;
+}
+
+/* зелёный плюс */
+#addCategoryBtn:hover {
+    background: #218838;
+}
+
+/* иконки Unicode */
+.action-btn.edit::before {
+    content: "✏️";
+}
+
+.action-btn.delete::before {
+    content: "🗑️";
+}
+
+/* цвета */
+.action-btn.edit {
+    background: orange;
+    color: #fff;
+}
+
+.action-btn.delete {
+    background: red;
+    color: #fff;
+}
+
+/* Кнопки действий: увеличить и отступы */
+.category-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* больше отступ */
+}
+
+.action-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Иконки через псевдоэлемент (только одна) */
+.action-btn.edit::before {
+    content: '✏️';
+}
+
+.action-btn.delete::before {
+    content: '🗑️';
+}
+
+/* Цвета для кнопок действий */
+.action-btn.edit {
+    background: orange;
+    color: #fff;
+}
+
+.action-btn.delete {
+    background: red;
+    color: #fff;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.modal-window {
+    position: relative;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    width: 400px; /* сделал шире */
+    max-width: 95%;
+    max-height: 90%;
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #333;
+}
+
+.modal-body {
+    margin-top: 10px;
+}
+
+.modal-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.ok-btn {
+    background-color: #28a745 !important; /* зелёный */
+    color: #fff !important;
+}
+
+.yes-btn {
+    background-color: #28a745 !important; /* зелёный */
+    color: #fff !important;
+}
+
+.no-btn {
+    background-color: #dc3545 !important; /* красный */
+    color: #fff !important;
+}
+
+.modal-actions button {
+    min-width: 80px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}

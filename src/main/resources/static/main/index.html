@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Поиск стажировок</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="./index.js"></script>
+</head>
+<body>
+<header class="site-header">
+    <div class="header-container">
+        <h1 class="site-title" id="homeLink">Internship Management System</h1>
+        <nav class="site-nav">
+            <a href="/favorite/index.html" class="nav-link">Избранное</a>
+            <a href="/category/index.html" class="nav-link">Категории</a>
+        </nav>
+        <button class="logout-btn" title="Logout"></button>
+    </div>
+</header>
+<main class="site-main">
+    <div class="top-bar">
+        <div class="search-container">
+            <form id="filterForm" data-mode="">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <input
+                                type="text"
+                                id="searchInput"
+                                placeholder="Поиск стажировок..."
+                                name="searchStr"
+                        >
+                        <span id="searchError" class="error-message"></span>
+                        <select id="searchMode" name="mode">
+                            <option value="title">По названию</option>
+                            <option value="description">По описанию</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <button type="button" class="dropdown-btn">Фильтры ⬇</button>
+                        <div class="dropdown-content">
+                            <div class="filter-section">
+                                <label>Тип оплаты:</label>
+                                <select name="paymentType">
+                                    <option value="">Все</option>
+                                    <option value="PAID">Оплачиваемые</option>
+                                    <option value="UNPAID">Неоплачиваемые</option>
+                                </select>
+                            </div>
+                            <div class="filter-section">
+                                <label>Дата создания(от/до):</label>
+                                <input type="date" id="startDate" name="start" placeholder="От">
+                                <input type="date" id="endDate" name="end" placeholder="До">
+                                <span id="dateError" class="error-message"></span>
+                            </div>
+                            <div class="filter-section">
+                                <label>Город:</label>
+                                <input type="text" name="address" placeholder="Введите город">
+                            </div>
+                            <div class="filter-section">
+                                <label>Категории:</label>
+                                <input
+                                        type="text"
+                                        id="categoryFilterInput"
+                                        placeholder="Поиск категории..."
+                                        autocomplete="off"
+                                >
+                                <select id="categoryListBox" multiple size="5"></select>
+                                <div id="selectedCategories" class="selected-categories"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-group form-actions">
+                        <button type="submit" class="btn-search">Найти</button>
+                        <button type="button" id="resetFilters" class="btn-reset">Сбросить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <button id="addInternBtn" class="btn-add" title="Добавить стажировку">➕ Добавить</button>
+    </div>
+    <div class="grid-container" id="internshipsGrid"></div>
+    <div class="pagination" id="pagination"></div>
+</main>
+<div class="modal" id="detailsModal">
+    <div class="modal-content">
+        <span class="close" onclick="hideDetails()">&times;</span>
+        <div id="modalBody"></div>
+    </div>
+</div>
+<footer class="site-footer">
+    © 2025 Internship Management System
+</footer>
+</body>
+</html>

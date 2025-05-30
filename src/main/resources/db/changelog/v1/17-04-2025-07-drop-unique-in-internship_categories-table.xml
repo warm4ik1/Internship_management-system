@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2025-04-17-drop-unique-in-internship_categories" author="warm4ik">
+        <preConditions onFail="WARN">
+            <uniqueConstraintExists
+                    schemaName="todolist"
+                    tableName="internship_categories"
+                    constraintName="internship_categories_unique"/>
+        </preConditions>
+
+        <dropUniqueConstraint
+                schemaName="todolist"
+                tableName="internship_categories"
+                constraintName="internship_categories_unique"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                  https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="16-04-2025-change-restrict-on-delete-cascade-for-categories" author="warm4ik">
+
+        <preConditions onFail="HALT">
+            <foreignKeyConstraintExists foreignKeyName="category_fkey" schemaName="todolist"/>
+        </preConditions>
+
+        <sql>
+            ALTER TABLE internship_categories
+            DROP
+            CONSTRAINT category_fkey;
+        </sql>
+
+        <sql>
+            ALTER TABLE internship_categories
+                ADD CONSTRAINT category_fkey
+                    FOREIGN KEY (category_id)
+                        REFERENCES categories (id)
+                        ON DELETE CASCADE;
+        </sql>
+
+        <rollback>
+            <sql>
+                ALTER TABLE internship_categories
+                    DROP CONSTRAINT category_fkey;
+            </sql>
+
+            <sql>
+                ALTER TABLE internship_categories
+                    ADD CONSTRAINT category_fkey
+                        FOREIGN KEY (category_id)
+                            REFERENCES categories (id)
+                            ON DELETE RESTRICT;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
